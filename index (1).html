@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Commune DSM - Punguza Foleni Dar es Salaam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ====== RANGI NA MIPANGILIO (badilisha hapa tu) ====== */
+:root{
+  --bahari:#0E3A4F;      /* bluu ya bahari - rangi kuu */
+  --bahari-2:#16566F;
+  --njano:#FFC21A;       /* njano ya daladala - rangi ya msisitizo */
+  --kijani:#1F9D55;
+  --machungwa:#E8920C;
+  --nyekundu:#D13B3B;
+  --mandhari:#EEF3F5;
+  --karatasi:#FFFFFF;
+  --maandishi:#16262E;
+  --kijivu:#5A6B73;
+  --mstari:#D3DDE1;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:"Source Sans 3",Arial,sans-serif;font-size:18px;line-height:1.6;color:var(--maandishi);background:var(--mandhari)}
+h1,h2,h3{font-family:"Bricolage Grotesque","Arial Black",Arial,sans-serif;line-height:1.15;color:var(--bahari)}
+a{color:var(--bahari-2)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,label:focus-visible{outline:3px solid var(--njano);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+section{padding:56px 0}
+section h2{font-size:clamp(1.7rem,4vw,2.3rem);margin-bottom:10px}
+.lead{color:var(--kijivu);max-width:62ch;margin-bottom:28px}
+
+/* ====== MENU ====== */
+header.nav{position:sticky;top:0;z-index:10;background:var(--bahari);color:#fff}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.logo{font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:800;font-size:1.15rem;color:#fff;text-decoration:none}
+.logo span{color:var(--njano)}
+nav ul{list-style:none;display:flex;gap:4px;flex-wrap:wrap}
+nav a{display:block;padding:6px 12px;color:#fff;text-decoration:none;border-radius:6px;font-size:.95rem}
+nav a:hover{background:var(--bahari-2)}
+
+/* ====== HERO ====== */
+.hero{background:var(--bahari);color:#fff;padding:48px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center}
+.hero h1{color:#fff;font-size:clamp(2.1rem,5.5vw,3.4rem);font-weight:800}
+.hero p{margin:16px 0 24px;color:#CFE3EA;max-width:46ch}
+.btn{display:inline-block;padding:12px 22px;border-radius:8px;font-weight:600;text-decoration:none;font-family:inherit;font-size:1rem;border:0;cursor:pointer}
+.btn-njano{background:var(--njano);color:#1b1500}
+.btn-njano:hover{background:#ffd04d}
+.btn-wazi{border:2px solid #7FB0C2;color:#fff;margin-left:8px}
+.btn-wazi:hover{background:var(--bahari-2)}
+
+/* Ubao wa hali ya barabara */
+.ubao{background:var(--karatasi);color:var(--maandishi);border-radius:14px;padding:18px;border-top:8px solid var(--njano)}
+.ubao h2{font-size:1.15rem;margin-bottom:2px}
+.ubao small{color:var(--kijivu)}
+.ubao ul{list-style:none;margin-top:10px}
+.ubao li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--mstari)}
+.ubao li:last-child{border-bottom:0}
+.ubao b{display:block;line-height:1.2}
+.ubao em{font-style:normal;color:var(--kijivu);font-size:.88rem}
+.hali{flex:none;min-width:92px;text-align:center;padding:4px 10px;border-radius:99px;font-size:.88rem;font-weight:600;color:#fff}
+.hali.safi{background:var(--kijani)}
+.hali.wastani{background:var(--machungwa)}
+.hali.nzito{background:var(--nyekundu)}
+
+/* ====== RAMANI ====== */
+.ramani{background:var(--karatasi);padding:10px;border-radius:14px;border:1px solid var(--mstari)}
+.ramani iframe{display:block;width:100%;height:420px;border:0;border-radius:8px}
+.ramani p{padding:10px 6px 2px;font-size:.92rem;color:var(--kijivu)}
+
+/* ====== MPANGAJI WA SAFARI (CSS tu, bila JavaScript) ====== */
+.mpangaji{background:var(--karatasi);border-radius:14px;border:1px solid var(--mstari);overflow:hidden}
+.mpangaji input{position:absolute;opacity:0;pointer-events:none}
+.vichupa{display:flex;flex-wrap:wrap;background:var(--mandhari)}
+.vichupa label{flex:1 1 140px;padding:14px 10px;text-align:center;cursor:pointer;font-weight:600;border-bottom:4px solid transparent;color:var(--kijivu)}
+.vichupa label:hover{background:#e1eaee}
+#s1:checked ~ .vichupa label[for="s1"],
+#s2:checked ~ .vichupa label[for="s2"],
+#s3:checked ~ .vichupa label[for="s3"],
+#s4:checked ~ .vichupa label[for="s4"]{background:var(--karatasi);color:var(--bahari);border-bottom-color:var(--njano)}
+.paneli{display:none;padding:22px}
+#s1:checked ~ .maudhui .p1,
+#s2:checked ~ .maudhui .p2,
+#s3:checked ~ .maudhui .p3,
+#s4:checked ~ .maudhui .p4{display:block}
+.paneli h3{font-size:1.3rem;margin-bottom:6px}
+.paneli ul{margin:10px 0 0 22px}
+.paneli li{margin-bottom:4px}
+.kidokezo{margin-top:14px;padding:10px 14px;background:#FFF6D6;border-left:5px solid var(--njano);border-radius:4px}
+
+/* ====== RIPOTI ====== */
+.ripoti{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:start}
+form{background:var(--karatasi);border:1px solid var(--mstari);border-radius:14px;padding:22px}
+label.sehemu{display:block;font-weight:600;margin:12px 0 4px}
+label.sehemu:first-child{margin-top:0}
+input[type=text],input[type=tel],select,textarea{width:100%;padding:10px 12px;font:inherit;border:1.5px solid #AFC0C7;border-radius:8px;background:#fff;color:var(--maandishi)}
+textarea{min-height:90px;resize:vertical}
+form .btn{margin-top:16px}
+.maelezo{background:var(--bahari);color:#fff;border-radius:14px;padding:22px}
+.maelezo h3{color:#fff;margin-bottom:8px}
+.maelezo p{color:#CFE3EA;margin-bottom:10px}
+.maelezo a{color:var(--njano)}
+
+/* ====== USAFIRI WA UMMA ====== */
+details{background:var(--karatasi);border:1px solid var(--mstari);border-radius:10px;margin-bottom:10px}
+summary{cursor:pointer;padding:16px 18px;font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:10px;color:var(--bahari)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--bahari-2)}
+details[open] summary::after{content:"\2212"}
+details[open] summary{border-bottom:1px solid var(--mstari)}
+details div{padding:14px 18px 18px}
+
+/* ====== CARPOOL ====== */
+.jedwali-nje{overflow-x:auto;background:var(--karatasi);border:1px solid var(--mstari);border-radius:14px}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--mstari)}
+th{background:var(--mandhari);color:var(--bahari);font-weight:600}
+tr:last-child td{border-bottom:0}
+
+/* ====== SULUHISHO ====== */
+.suluhisho{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.suluhisho div{background:var(--karatasi);border:1px solid var(--mstari);border-radius:10px;padding:18px}
+.suluhisho h3{font-size:1.1rem;margin-bottom:6px}
+.suluhisho p{font-size:.97rem;color:var(--kijivu)}
+
+/* ======TAHAARIFA (USSD, SMS, WEBSITE) ====== */
+.njia-arifa{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;align-items:start}
+.kadi{background:var(--karatasi);border:1px solid var(--mstari);border-radius:14px;padding:22px}
+.kadi h3{font-size:1.2rem;margin-bottom:8px}
+.kadi ol{margin:10px 0 0 22px}
+.kadi ol li{margin-bottom:4px}
+.kadi .lebo{display:inline-block;background:#E4F3EA;color:#14653A;font-size:.85rem;font-weight:600;padding:2px 10px;border-radius:99px;margin-bottom:8px}
+.msimbo{display:inline-block;background:var(--bahari);color:var(--njano);padding:2px 12px;border-radius:6px;font-size:1.2rem;font-weight:600}
+fieldset.barabara-chagua{border:0;margin:12px 0 0}
+.barabara-chagua legend{font-weight:600;margin-bottom:6px}
+.barabara-chagua .chaguo{display:flex;gap:8px;align-items:center;margin-bottom:6px;font-size:1rem}
+.barabara-chagua input{width:20px;height:20px;accent-color:var(--bahari-2)}
+.ndogo{font-size:.9rem;color:var(--kijivu);margin-top:12px}
+
+/* ====== JAVASCRIPT: vipengele vipya ====== */
+.mtandao{background:var(--nyekundu);color:#fff;text-align:center;padding:8px 16px;font-size:.95rem}
+.mtandao[hidden]{display:none}
+.hesabu{margin-bottom:20px}
+.hesabu .safu{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:10px 0}
+.hesabu .safu label{font-weight:600}
+.hesabu input{display:block;width:100%;margin-top:4px;padding:10px 12px;font:inherit;border:1.5px solid #AFC0C7;border-radius:8px}
+.ujumbe{margin-top:12px;min-height:1.4em;font-weight:600;color:var(--bahari-2)}
+#tafuta-pamoja{margin-bottom:14px}
+
+footer{background:var(--bahari);color:#CFE3EA;padding:30px 0;font-size:.95rem}
+footer strong{color:#fff}
+
+/* ====== SIMU NA SKRINI NDOGO ====== */
+@media (max-width:820px){
+  .hero .wrap,.ripoti{grid-template-columns:1fr}
+  .btn-wazi{margin:10px 0 0}
+  section{padding:40px 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="mtandao" class="mtandao" role="status" hidden>Huna mtandao. Unaona taarifa za mwisho zilizohifadhiwa kwenye simu yako.</div>
+
+<!-- ====== MENU ====== -->
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#juu">Smart Commune <span>DSM</span></a>
+    <nav aria-label="Menyu kuu">
+      <ul>
+        <li><a href="#hali">Hali ya barabara</a></li>
+        <li><a href="#ramani">Ramani</a></li>
+        <li><a href="#safari">Panga safari</a></li>
+        <li><a href="#ripoti">Toa taarifa</a></li>
+        <li><a href="#umma">Usafiri wa umma</a></li>
+        <li><a href="#pamoja">Safiri pamoja</a></li>
+        <li><a href="#arifa">Pata arifa</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ====== HERO ====== -->
+<main id="juu">
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Foleni ya Dar es Salaam inaanza kabla hujaondoka nyumbani.</h1>
+      <p>Angalia hali ya barabara, chagua muda sahihi wa kuondoka, na uwasaidie wengine kwa kutoa taarifa ya ajali, mafuriko au barabara iliyofungwa.</p>
+      <a class="btn btn-njano" href="#safari">Panga safari yangu</a>
+      <a class="btn btn-wazi" href="#ripoti">Toa taarifa</a>
+    </div>
+
+    <!-- Ubao wa hali ya barabara: badilisha maneno na rangi mwenyewe -->
+    <div class="ubao" id="hali">
+      <h2>Hali ya barabara sasa</h2>
+      <small id="ubao-muda">Mfano tu. Seva ikiwaka, taarifa halisi zitaonekana hapa.</small>
+      <ul id="ubao-orodha">
+        <li><div><b>Morogoro Rd (Ubungo - Kimara)</b><em>Magari yanatembea polepole</em></div><span class="hali nzito">Foleni kubwa</span></li>
+        <li><div><b>Bagamoyo Rd (Mwenge - Kawe)</b><em>Msongamano wa wastani</em></div><span class="hali wastani">Wastani</span></li>
+        <li><div><b>Nyerere Rd (Tazara - Airport)</b><em>Magari yanaenda vizuri</em></div><span class="hali safi">Salama</span></li>
+        <li><div><b>Kilwa Rd (Mbagala - Tazara)</b><em>Foleni asubuhi</em></div><span class="hali nzito">Foleni kubwa</span></li>
+        <li><div><b>Daraja la Nyerere (Kigamboni)</b><em>Hakuna foleni</em></div><span class="hali safi">Salama</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ====== RAMANI ====== -->
+<section id="ramani">
+  <div class="wrap">
+    <h2>Ramani ya Dar es Salaam</h2>
+    <p class="lead">Tafuta eneo lako, kisha angalia njia mbadala kabla ya kuondoka. Ramani hii inahitaji intaneti.</p>
+    <div class="ramani">
+      <iframe title="Ramani ya Dar es Salaam"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=39.15%2C-6.95%2C39.40%2C-6.70&amp;layer=mapnik"
+        loading="lazy"></iframe>
+      <p><a href="https://www.openstreetmap.org/#map=12/-6.8235/39.2695" target="_blank" rel="noopener">Fungua ramani kubwa</a> |
+         <a href="https://www.google.com/maps/@-6.8235,39.2695,12z/data=!5m1!1e1" target="_blank" rel="noopener">Angalia foleni kwenye Google Maps</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== MPANGAJI WA SAFARI ====== -->
+<section id="safari" style="background:var(--karatasi)">
+  <div class="wrap">
+    <h2>Panga safari yako</h2>
+    <p class="lead">Chagua muda unaotaka kusafiri uone ushauri wa kuepuka foleni. Kichupa cha saa ya sasa huchaguliwa chenyewe.</p>
+
+    <div class="kadi hesabu">
+      <h3>Niondoke saa ngapi?</h3>
+      <div class="safu">
+        <label>Nataka kufika saa (saa 24)
+          <input type="time" id="saa-fika" value="08:00">
+        </label>
+        <label>Safari huchukua dakika ngapi siku foleni haipo?
+          <input type="number" id="dak-kawaida" value="40" min="5" max="240">
+        </label>
+      </div>
+      <button type="button" class="btn btn-njano" id="hesabu-btn">Hesabu</button>
+      <p class="ujumbe" id="hesabu-matokeo" role="status"></p>
+    </div>
+
+    <div class="mpangaji">
+      <input type="radio" name="muda" id="s1" checked>
+      <input type="radio" name="muda" id="s2">
+      <input type="radio" name="muda" id="s3">
+      <input type="radio" name="muda" id="s4">
+
+      <div class="vichupa">
+        <label for="s1">Asubuhi (5:00 - 9:00)</label>
+        <label for="s2">Mchana (9:00 - 15:00)</label>
+        <label for="s3">Jioni (15:00 - 20:00)</label>
+        <label for="s4">Usiku (baada ya 20:00)</label>
+      </div>
+
+      <div class="maudhui">
+        <div class="paneli p1">
+          <h3>Asubuhi: muda wa foleni kubwa</h3>
+          <p>Watu wengi wanaenda kazini na shuleni kwa wakati mmoja.</p>
+          <ul>
+            <li>Ondoka kabla ya saa 11:30 alfajiri au baada ya saa 3:00 asubuhi.</li>
+            <li>Tumia BRT au treni kama njia yako inapitiwa nayo.</li>
+            <li>Kama unatoka Kigamboni, fikiria feri au daraja kulingana na foleni.</li>
+            <li>Kama ofisi yako inaruhusu, omba kuanza kazi saa 3:00.</li>
+          </ul>
+          <p class="kidokezo">Kidokezo: dakika 30 mapema mara nyingi zinaokoa saa nzima barabarani.</p>
+        </div>
+
+        <div class="paneli p2">
+          <h3>Mchana: muda mzuri wa kusafiri</h3>
+          <p>Barabara nyingi zina nafasi zaidi, ila maeneo ya biashara kama Kariakoo bado huwa na msongamano.</p>
+          <ul>
+            <li>Panga miadi, benki na ununuzi wako muda huu.</li>
+            <li>Epuka Kariakoo wakati wa mizigo kushushwa asubuhi na adhuhuri.</li>
+            <li>Unganisha safari kadhaa kuwa moja ili usirudie njia.</li>
+          </ul>
+          <p class="kidokezo">Kidokezo: fanya shughuli zako nyingi mchana, acha asubuhi na jioni kwa wanaokwenda kazini.</p>
+        </div>
+
+        <div class="paneli p3">
+          <h3>Jioni: foleni ya kurudi nyumbani</h3>
+          <p>Watu wote wanatoka kazini kwa muda mmoja, hasa kuanzia saa 11:00 hadi saa 2:00 usiku.</p>
+          <ul>
+            <li>Kama unaweza, subiri hadi baada ya saa 2:00 usiku kuondoka ofisini.</li>
+            <li>Tumia muda wa kusubiri kumaliza kazi, kula au kufanya mazoezi.</li>
+            <li>Safiri na wenzako wa njia moja (angalia sehemu ya "Safiri pamoja").</li>
+            <li>Angalia taarifa za mvua, kwa sababu mafuriko huongeza foleni sana.</li>
+          </ul>
+          <p class="kidokezo">Kidokezo: mvua ikinyesha, ongeza muda wa safari mara mbili.</p>
+        </div>
+
+        <div class="paneli p4">
+          <h3>Usiku: barabara ziko wazi</h3>
+          <p>Foleni ni ndogo, lakini usalama ni muhimu zaidi.</p>
+          <ul>
+            <li>Tumia usafiri unaoaminika na mwambie mtu unapofika.</li>
+            <li>Kuwa makini na maeneo yenye ujenzi au barabara zisizo na taa.</li>
+            <li>Epuka kuendesha ukiwa umechoka.</li>
+          </ul>
+          <p class="kidokezo">Kidokezo: tuma taarifa kwenye sehemu ya "Toa taarifa" ukiona hatari barabarani.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== RIPOTI ZA WANANCHI ====== -->
+<section id="ripoti">
+  <div class="wrap">
+    <h2>Toa taarifa ya barabara</h2>
+    <p class="lead">Umeona ajali, mafuriko au barabara iliyofungwa? Tuambie ili wengine waepuke eneo hilo.</p>
+
+    <div class="ripoti">
+      <!-- BADILISHA email hapa chini kuwa email yako halisi -->
+      <form id="fomu-ripoti" action="mailto:weka-email-yako@gmail.com?subject=Taarifa ya barabara DSM" method="post" enctype="text/plain">
+        <label class="sehemu" for="aina">Nini kimetokea?</label>
+        <select id="aina" name="kind" required>
+          <option value="">Chagua...</option>
+          <option>Ajali</option>
+          <option>Foleni kubwa</option>
+          <option>Mafuriko</option>
+          <option>Barabara imefungwa</option>
+          <option>Taa za barabarani hazifanyi kazi</option>
+          <option>Gari limeharibika barabarani</option>
+          <option>Nyingine</option>
+        </select>
+
+        <label class="sehemu" for="barabara">Barabara</label>
+        <select id="barabara" name="road" required>
+          <option value="">Chagua...</option>
+          <option value="morogoro">Morogoro Rd</option>
+          <option value="bagamoyo">Bagamoyo Rd</option>
+          <option value="nyerere">Nyerere Rd</option>
+          <option value="kilwa">Kilwa Rd</option>
+          <option value="kigamboni">Kigamboni</option>
+        </select>
+
+        <label class="sehemu" for="eneo">Mahali</label>
+        <input type="text" id="eneo" name="place" placeholder="Mfano: Morogoro Rd, karibu na Ubungo Mataa" required>
+
+        <label class="sehemu" for="maelezo">Maelezo mafupi</label>
+        <textarea id="maelezo" name="details" placeholder="Eleza kwa ufupi ulichoona"></textarea>
+
+        <label class="sehemu" for="simu">Namba ya simu (si lazima)</label>
+        <input type="tel" id="simu" name="phone" placeholder="07xx xxx xxx">
+
+        <button class="btn btn-njano" type="submit">Tuma taarifa</button>
+        <p class="ujumbe" id="ripoti-hali" role="status"></p>
+      </form>
+
+      <div class="maelezo">
+        <h3>Kwa dharura</h3>
+        <p>Kwa ajali au hatari ya haraka, piga simu kwanza kabla ya kutumia website hii.</p>
+        <p><strong>Polisi:</strong> <a href="tel:112">112</a><br>
+           <strong>Zimamoto:</strong> <a href="tel:114">114</a></p>
+        <p>Njia ya haraka zaidi: tuma ujumbe kwenye WhatsApp ya kikundi chako cha eneo.</p>
+        <p><a href="https://wa.me/?text=Taarifa%20ya%20barabara%20DSM%3A%20" target="_blank" rel="noopener">Tuma kwa WhatsApp</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== USAFIRI WA UMMA ====== -->
+<section id="umma" style="background:var(--karatasi)">
+  <div class="wrap">
+    <h2>Usafiri wa umma</h2>
+    <p class="lead">Gari moja la umma linaweza kuondoa magari mengi binafsi barabarani. Bonyeza kila kichwa kuona maelezo.</p>
+
+    <details open>
+      <summary>Mabasi ya mwendokasi (BRT / DART)</summary>
+      <div>
+        <p>Yana njia yake maalum, kwa hiyo hayakwami kwenye foleni ya magari mengine.</p>
+        <ul style="margin:8px 0 0 22px">
+          <li>Njia kuu: Kimara - Kivukoni (kupitia Morogoro Rd).</li>
+          <li>Faida: muda wa safari unajulikana, hata saa za foleni.</li>
+          <li>Ushauri: lipia kwa kadi kabla ya kupanda ili kuepuka mstari mrefu.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Daladala</summary>
+      <div>
+        <p>Zinafika maeneo mengi ambayo BRT haifiki.</p>
+        <ul style="margin:8px 0 0 22px">
+          <li>Panda kwenye vituo rasmi ili usichelewe na usizuie magari mengine.</li>
+          <li>Epuka kupanda kwenye vituo vyenye mrundikano mkubwa saa za kilele.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Feri ya Magogoni - Kigamboni</summary>
+      <div>
+        <p>Njia mbadala ya daraja kwa wakazi wa Kigamboni. Chagua feri au daraja kulingana na foleni ya siku.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Treni ya abiria</summary>
+      <div>
+        <p>Treni ya abiria ya Dar es Salaam inapita njia ambazo magari huchelewa sana. Angalia ratiba ya sasa kabla ya kusafiri.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Bodaboda na bajaj</summary>
+      <div>
+        <p>Zinafaa kwa safari fupi au kufika kituo cha BRT/treni. Vaa kofia ngumu (helmet) na kubaliana nauli kabla ya kupanda.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ====== SAFIRI PAMOJA ====== -->
+<section id="pamoja">
+  <div class="wrap">
+    <h2>Safiri pamoja</h2>
+    <p class="lead">Magari manne yakiwa na mtu mmoja mmoja ni foleni. Gari moja lenye watu wanne ni njia wazi. Hii ni orodha ya mfano ya watu wanaotafuta wenzao wa safari.</p>
+
+    <label class="sehemu" for="tafuta-pamoja">Tafuta kwa eneo (mfano: Kimara)</label>
+    <input type="text" id="tafuta-pamoja" placeholder="Andika eneo...">
+    <p class="ndogo" id="pamoja-tupu" hidden>Hakuna safari kwa eneo hilo kwa sasa.</p>
+    <div class="jedwali-nje">
+      <table id="jedwali-pamoja">
+        <thead>
+          <tr><th>Kutoka</th><th>Kwenda</th><th>Muda wa kuondoka</th><th>Nafasi</th><th>Wasiliana</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Kimara</td><td>Posta</td><td>Saa 12:00 asubuhi</td><td>3</td><td><a href="https://wa.me/255700000000">WhatsApp</a></td></tr>
+          <tr><td>Mbagala</td><td>Kariakoo</td><td>Saa 1:00 asubuhi</td><td>2</td><td><a href="https://wa.me/255700000000">WhatsApp</a></td></tr>
+          <tr><td>Mbezi Beach</td><td>Mikocheni</td><td>Saa 1:30 asubuhi</td><td>3</td><td><a href="https://wa.me/255700000000">WhatsApp</a></td></tr>
+          <tr><td>Posta</td><td>Kimara</td><td>Saa 12:30 jioni</td><td>3</td><td><a href="https://wa.me/255700000000">WhatsApp</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ARIFA MOJA KWA MOJA ====== -->
+<section id="arifa">
+  <div class="wrap">
+    <h2>Pata arifa moja kwa moja</h2>
+    <p class="lead">Ajali, mafuriko au foleni kubwa ikitokea kwenye njia yako, ujumbe unakufikia wenyewe. Unaweza kutumia simu yoyote, hata ya kawaida isiyo na intaneti.</p>
+
+    <div class="njia-arifa">
+      <!-- NJIA 1: USSD (bila intaneti) -->
+      <div class="kadi">
+        <span class="lebo">Bila intaneti</span>
+        <h3>Kupitia USSD</h3>
+        <p>Piga <strong class="msimbo">*XXX#</strong> kwenye simu yoyote.</p>
+        <ol>
+          <li>Chagua 1 kuona hali ya barabara.</li>
+          <li>Chagua 2 kujisajili kupata arifa za njia yako.</li>
+          <li>Chagua 3 kutoa taarifa ya ajali au mafuriko.</li>
+          <li>Chagua 4 kuacha kupokea arifa.</li>
+        </ol>
+        <p class="ndogo">Namba halisi ya USSD (badala ya XXX) utapewa baada ya kusajili huduma. Angalia faili la README_SW.md.</p>
+      </div>
+
+      <!-- NJIA 2: SMS (bila intaneti) -->
+      <div class="kadi">
+        <span class="lebo">Bila intaneti</span>
+        <h3>Kupitia SMS</h3>
+        <p>Tuma ujumbe kwenda namba <strong class="msimbo">15XXX</strong></p>
+        <ol>
+          <li><strong>JIUNGE MOROGORO</strong> kupata arifa za Morogoro Rd.</li>
+          <li><strong>HALI KILWA</strong> kuuliza hali ya Kilwa Rd.</li>
+          <li><strong>ONDOA</strong> kuacha kupokea arifa.</li>
+        </ol>
+        <p class="ndogo">Barabara zinazopatikana: MOROGORO, BAGAMOYO, NYERERE, KILWA, KIGAMBONI.</p>
+      </div>
+
+      <!-- NJIA 3: Fomu ya website (ukiwa na intaneti) -->
+      <!-- BADILISHA http://localhost:5000 kuwa anwani ya server yako ukishaiweka mtandaoni -->
+      <form class="kadi" id="fomu-arifa" action="http://localhost:5000/subscribe" method="post">
+        <span class="lebo">Ukiwa na intaneti</span>
+        <h3>Jisajili hapa</h3>
+        <label class="sehemu" for="namba">Namba ya simu</label>
+        <input type="tel" id="namba" name="phone" placeholder="07xx xxx xxx" pattern="[0-9+ ]{10,14}" required>
+
+        <fieldset class="barabara-chagua">
+          <legend>Barabara unazotumia</legend>
+          <label class="chaguo"><input type="checkbox" name="roads" value="morogoro" checked> Morogoro Rd</label>
+          <label class="chaguo"><input type="checkbox" name="roads" value="bagamoyo"> Bagamoyo Rd</label>
+          <label class="chaguo"><input type="checkbox" name="roads" value="nyerere"> Nyerere Rd</label>
+          <label class="chaguo"><input type="checkbox" name="roads" value="kilwa"> Kilwa Rd</label>
+          <label class="chaguo"><input type="checkbox" name="roads" value="kigamboni"> Kigamboni</label>
+        </fieldset>
+
+        <button class="btn btn-njano" type="submit">Nitumie arifa</button>
+        <p class="ujumbe" id="arifa-hali" role="status"></p>
+        <p class="ndogo">Namba yako itatumika kwa arifa za barabara tu. Unaweza kuacha wakati wowote kwa kutuma ONDOA.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SULUHISHO ZOTE ====== -->
+<section style="background:var(--karatasi)">
+  <div class="wrap">
+    <h2>Njia za kupunguza foleni</h2>
+    <p class="lead">Kila mtu anaweza kusaidia, hata bila kuwa na gari.</p>
+    <div class="suluhisho">
+      <div><h3>Badilisha muda</h3><p>Ondoka mapema au chelewa kidogo. Hii peke yake hupunguza msongamano wa saa za kilele.</p></div>
+      <div><h3>Fanya kazi ukiwa nyumbani</h3><p>Siku moja au mbili kwa wiki za kazi ya mbali zinapunguza magari barabarani.</p></div>
+      <div><h3>Tumia usafiri wa umma</h3><p>BRT, treni na feri zinabeba watu wengi kwa nafasi ndogo ya barabara.</p></div>
+      <div><h3>Safiri pamoja</h3><p>Gari moja lenye watu wanne linaondoa magari matatu barabarani.</p></div>
+      <div><h3>Toa taarifa</h3><p>Ajali na mafuriko yakijulikana mapema, madereva wanaepuka eneo hilo.</p></div>
+      <div><h3>Maegesho sahihi</h3><p>Usiegeshe barabarani. Magari yaliyoegeshwa vibaya hupunguza njia na kuleta foleni.</p></div>
+      <div><h3>Arifa kwa kila mtu</h3><p>USSD na SMS zinafikia hata watu wasio na intaneti, kwa hiyo wote wanajua njia ipi ya kuepuka.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Smart Commune DSM</strong> - mradi wa kupunguza foleni Dar es Salaam.</p>
+    <p>Taarifa kwenye ukurasa huu ni za mfano. Zinahitaji kusasishwa mwenyewe au kuunganishwa na chanzo cha data halisi.</p>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+/* ====== MIPANGILIO: badilisha anwani hii ukiweka seva mtandaoni ====== */
+const API = "http://localhost:5000";
+
+/* ====== VIFAA VIDOGO ====== */
+const $ = (id) => document.getElementById(id);
+const LEVEL = { safi: "Salama", wastani: "Wastani", nzito: "Foleni kubwa" };
+const store = {
+  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* hifadhi imejaa au imezimwa */ } }
+};
+const saaSasa = () => new Date().toLocaleTimeString("sw-TZ", { hour: "2-digit", minute: "2-digit" });
+
+/* Tuma data kwa seva. Kosa la seva (server:true) ni tofauti na kukosa mtandao. */
+async function tuma(path, formData) {
+  const res = await fetch(API + path, {
+    method: "POST",
+    body: formData,
+    headers: { Accept: "application/json" }
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) throw Object.assign(new Error(json.error || "Hitilafu imetokea."), { server: true });
+  return json;
+}
+
+/* ====== 1. HALI YA BARABARA YA MOJA KWA MOJA ====== */
+function jengaUbao(barabara, maelezo) {
+  const ul = $("ubao-orodha");
+  ul.replaceChildren(...barabara.map((r) => {
+    const li = document.createElement("li");
+    const kushoto = document.createElement("div");
+    const jina = document.createElement("b");
+    const dokezo = document.createElement("em");
+    jina.textContent = r.name;
+    dokezo.textContent = r.note;           /* textContent = salama dhidi ya code hatari */
+    kushoto.append(jina, dokezo);
+    const chip = document.createElement("span");
+    chip.className = "hali " + r.level;
+    chip.textContent = LEVEL[r.level] || r.level;
+    li.append(kushoto, chip);
+    return li;
+  }));
+  $("ubao-muda").textContent = maelezo;
+}
+
+async function pakiaHali() {
+  try {
+    const res = await fetch(API + "/api/status", { cache: "no-store" });
+    if (!res.ok) throw new Error("seva");
+    const json = await res.json();
+    store.set("hali", json);
+    jengaUbao(json.roads, "Imesasishwa saa " + saaSasa());
+  } catch {
+    const zamani = store.get("hali", null);   /* offline: onyesha taarifa za mwisho */
+    if (zamani) jengaUbao(zamani.roads, "Taarifa za mwisho zilizohifadhiwa (" + zamani.updated + ")");
+  }
+}
+
+/* ====== 2. KIPINDI CHA SAFARI: chagua kichupa kulingana na saa ====== */
+(function chaguaKichupa() {
+  const h = new Date().getHours();
+  const id = h >= 5 && h < 9 ? "s1" : h >= 9 && h < 15 ? "s2" : h >= 15 && h < 20 ? "s3" : "s4";
+  $(id).checked = true;
+})();
+
+/* ====== 3. KIKOKOTOO: NIONDOKE SAA NGAPI? (makadirio tu) ====== */
+$("hesabu-btn").addEventListener("click", () => {
+  const out = $("hesabu-matokeo");
+  const [h, m] = $("saa-fika").value.split(":").map(Number);
+  const dak = Number($("dak-kawaida").value);
+  if (Number.isNaN(h) || !(dak > 0)) { out.textContent = "Weka saa ya kufika na muda wa safari."; return; }
+
+  const fika = h * 60 + m;
+  let kigezo = 1.2;                                              /* muda wa kawaida */
+  if ((fika >= 420 && fika <= 570) || (fika >= 990 && fika <= 1200)) kigezo = 2;         /* kilele */
+  else if ((fika >= 360 && fika < 420) || (fika > 570 && fika <= 630) || (fika >= 900 && fika < 990)) kigezo = 1.5;
+
+  const jumla = Math.round(dak * kigezo) + 10;                   /* +10 dakika za ziada */
+  const ondoka = (fika - jumla + 1440) % 1440;
+  const f = (n) => String(Math.floor(n / 60)).padStart(2, "0") + ":" + String(n % 60).padStart(2, "0");
+  out.textContent = `Ondoka saa ${f(ondoka)} (saa 24). Safari inaweza kuchukua dakika ${jumla}, pamoja na dakika 10 za ziada. Ni makadirio tu, si hali halisi ya barabara.`;
+});
+
+/* ====== 4. FOMU YA TAHAARIFA (kujisajili) ====== */
+$("fomu-arifa").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const out = $("arifa-hali");
+  e.submitter.disabled = true;
+  out.textContent = "Inatuma...";
+  try {
+    const json = await tuma("/subscribe", new FormData(e.target));
+    out.textContent = json.message;
+    e.target.reset();
+  } catch (err) {
+    out.textContent = err.server ? err.message
+      : "Seva haipatikani sasa. Tumia USSD au SMS, au jaribu tena baadaye.";
+  } finally {
+    e.submitter.disabled = false;
+  }
+});
+
+/* ====== 5. FOMU YA TAARIFA: inahifadhi ukiwa offline, inatuma mtandao ukirudi ====== */
+const FOLENI = "foleniRipoti";
+
+async function tumaFoleni() {
+  const zote = store.get(FOLENI, []);
+  if (!zote.length) return;
+  const baki = [];
+  for (const r of zote) {
+    try {
+      const fd = new FormData();
+      Object.entries(r).forEach(([k, v]) => fd.append(k, v));
+      await tuma("/report", fd);
+    } catch (err) {
+      if (!err.server) baki.push(r);       /* mtandao umekatika: jaribu tena baadaye */
+    }
+  }
+  store.set(FOLENI, baki);
+}
+
+$("fomu-ripoti").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const out = $("ripoti-hali");
+  const data = Object.fromEntries(new FormData(e.target));
+  e.submitter.disabled = true;
+  out.textContent = "Inatuma...";
+  try {
+    const json = await tuma("/report", new FormData(e.target));
+    out.textContent = json.message;
+    e.target.reset();
+  } catch (err) {
+    if (err.server) {
+      out.textContent = err.message;
+    } else {
+      store.set(FOLENI, [...store.get(FOLENI, []), data]);
+      out.textContent = "Mtandao au seva haipatikani. Taarifa imehifadhiwa kwenye simu yako, na itatumwa utakapofungua ukurasa huu ukiwa na mtandao.";
+      e.target.reset();
+    }
+  } finally {
+    e.submitter.disabled = false;
+  }
+});
+
+/* ====== 6. TAFUTA SAFARI ZA KUSAFIRI PAMOJA ====== */
+$("tafuta-pamoja").addEventListener("input", (e) => {
+  const swali = e.target.value.trim().toLowerCase();
+  let zinazoonekana = 0;
+  document.querySelectorAll("#jedwali-pamoja tbody tr").forEach((tr) => {
+    const ndiyo = tr.textContent.toLowerCase().includes(swali);
+    tr.hidden = !ndiyo;
+    if (ndiyo) zinazoonekana++;
+  });
+  $("pamoja-tupu").hidden = zinazoonekana > 0;
+});
+
+/* ====== 7. HALI YA MTANDAO NA KUANZA ====== */
+function onyeshaMtandao() { $("mtandao").hidden = navigator.onLine; }
+window.addEventListener("offline", onyeshaMtandao);
+window.addEventListener("online", () => { onyeshaMtandao(); pakiaHali(); tumaFoleni(); });
+
+onyeshaMtandao();
+pakiaHali();
+tumaFoleni();
+setInterval(pakiaHali, 60000);   /* sasisha kila dakika 1 */
+</script>
+
+</body>
+</html>
